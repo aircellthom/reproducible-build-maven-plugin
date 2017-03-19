@@ -89,6 +89,42 @@
     
   </properties>
 
+  <profiles>
+    <profile>
+      <id>classic</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <distributionManagement>
+        <repository>
+          <id>central</id>
+          <name>dil-vm-gap-12.aircell.prod-releases</name>
+          <url>http://dil-vm-gap-12.aircell.prod:8081/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+          <id>snapshots</id>
+          <name>dil-vm-gap-12.aircell.prod-snapshots</name>
+          <url>http://dil-vm-gap-12.aircell.prod:8081/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>jaguar</id>
+      <distributionManagement>
+        <repository>
+          <id>central</id>
+          <name>ba-vm-afy-01.scm.baengr.gogoair.com-releases</name>
+          <url>http://ba-vm-afy-01.scm.baengr.gogoair.com:8081/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+          <id>snapshots</id>
+          <name>ba-vm-afy-01.scm.baengr.gogoair.com-snapshots</name>
+          <url>http://ba-vm-afy-01.scm.baengr.gogoair.com:8081/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+  </profiles>
+
   <dependencies>
   
     <dependency>
