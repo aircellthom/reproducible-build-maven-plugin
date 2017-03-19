@@ -74,6 +74,7 @@ public final class StripJaxbMojo extends AbstractMojo
         }
         final Charset charset = Charset.forName(encoding);
         final JaxbObjectFactoryFixer fixer = new JaxbObjectFactoryFixer(charset);
+        final JaxbCommentCleaner cleaner = new JaxbCommentCleaner(charset);
         final File tmpFile = createTempFile();
         
         try
@@ -94,6 +95,23 @@ public final class StripJaxbMojo extends AbstractMojo
                         getLog().error("Error when normalizing " + f.toFile().getAbsolutePath(), e);
                     }
                 });
+
+            Files.walk(generatedDirectory.toPath())
+                .filter(Files::isRegularFile)
+                .filter(f -> f.toFile().getName().endsWith(".js_disabled") || f.toFile().getName().endsWith(".java"))
+                .forEach(f ->
+                {
+                    getLog().info("Cleaning " + f.toFile().getAbsolutePath());
+                    try
+                    {
+                        cleaner.strip(f.toFile(), tmpFile);
+                        Files.move(tmpFile.toPath(), f, StandardCopyOption.REPLACE_EXISTING);
+                    }
+                    catch (IOException e)
+                    {
+                        getLog().error("Error when normalizing " + f.toFile().getAbsolutePath(), e);
+                    }
+                });
         }
         catch (IOException e)
         {
@@ -105,7 +123,7 @@ public final class StripJaxbMojo extends AbstractMojo
     {
         try
         {
-            final File out = File.createTempFile("ObjectFactory", null);
+            final File out = File.createTempFile("GeneratedSource", null);
             out.deleteOnExit();
             return out;
         } catch (IOException e)

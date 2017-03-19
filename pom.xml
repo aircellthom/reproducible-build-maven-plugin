@@ -3,7 +3,7 @@
 
   <groupId>io.github.zlika</groupId>
   <artifactId>reproducible-build-maven-plugin</artifactId>
-  <version>0.2</version>
+  <version>0.2.1</version>
   <packaging>maven-plugin</packaging>
 
   <name>Reproducible Build Maven Plugin</name>
@@ -416,18 +416,18 @@
             </executions>
           </plugin>
           
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>${maven-gpg-plugin.version}</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals><goal>sign</goal></goals>
-              </execution>
-            </executions>
-          </plugin>
+          <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-gpg-plugin</artifactId>-->
+            <!--<version>${maven-gpg-plugin.version}</version>-->
+            <!--<executions>-->
+              <!--<execution>-->
+                <!--<id>sign-artifacts</id>-->
+                <!--<phase>verify</phase>-->
+                <!--<goals><goal>sign</goal></goals>-->
+              <!--</execution>-->
+            <!--</executions>-->
+          <!--</plugin>-->
           
         </plugins>
       </build>
